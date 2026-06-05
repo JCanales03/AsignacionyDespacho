@@ -10,7 +10,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(DespachoException.class)
     public ResponseEntity<String> handleDespacho(DespachoException ex) {
-        // Esto captura tu excepción y devuelve un 400 Bad Request
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }
