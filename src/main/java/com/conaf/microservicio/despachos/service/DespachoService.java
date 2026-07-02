@@ -24,7 +24,7 @@ public class DespachoService {
     public String gestionarDespacho(Long incendioId) {
         try {
             Map<String, Object> incendio = webClientBuilder.build().get()
-                .uri("http://localhost:8091/api/incendios/" + incendioId)
+                .uri("https://incendios.onrender.com/api/incendios/" + incendioId)
                 .retrieve()
                 .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {})
                 .block();
@@ -34,7 +34,7 @@ public class DespachoService {
             }
 
             List<Map<String, Object>> brigadasDisponibles = webClientBuilder.build().get()
-                .uri("http://localhost:8084/api/brigadas/filtro/estado/Disponible")
+                .uri("https://brigadas-lj77.onrender.com/api/brigadas/filtro/estado/Disponible")
                 .retrieve()
                 .bodyToFlux(new ParameterizedTypeReference<Map<String, Object>>() {})
                 .collectList()
@@ -48,7 +48,7 @@ public class DespachoService {
             Integer brigadaId = (Integer) brigada.get("id");
 
             webClientBuilder.build().patch()
-                .uri("http://localhost:8084/api/brigadas/" + brigadaId + "/estado?nuevoEstado=En Combate")
+                .uri("https://brigadas-lj77.onrender.com/api/brigadas/" + brigadaId + "/estado?nuevoEstado=En Combate")
                 .retrieve()
                 .toBodilessEntity()
                 .block();
